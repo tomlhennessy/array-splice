@@ -89,3 +89,136 @@ let longestWord = function(sentence) {
 
 console.log(longestWord('where did everyone go')); // 'everyone'
 ```
+
+## Shortest Word
+Returns the shortest word in a sentence, breaking ties by including the word that appears later in the sentence.
+
+```javascript
+function shortestWord(sentence) {
+    const words = sentence.split(' ');
+
+    let shortestLength = Infinity;
+    let shortestWord = null;
+    let shortestIndex = -1;
+
+    words.forEach(function(word, index) {
+        const wordLength = word.length;
+
+        if (wordLength < shortestLength || (wordLength === shortestLength && index > shortestIndex)) {
+            shortestWord = word;
+            shortestLength = wordLength;
+            shortestIndex = index;
+        }
+    });
+
+    return shortestWord;
+}
+```
+
+## Reverse sentence
+Returns a new sentence where the order of the words is reversed.
+
+```javascript
+let reverseSentence = function(sentence) {
+    // split sentence into words using whitespace as delimiter
+    let words = sentence.split(' ');
+    // initialise empty array to store reversed words
+    let newWords = [];
+
+    // iterate through words array in reverse order
+    for (let i = words.length - 1; i >= 0; i--) {
+        // add each word to newWords array
+        newWords.push(words[i]);
+    }
+
+    // join reversed words array into sentence
+    let newSentence = newWords.join(' ');
+    return newSentence;
+}
+```
+
+## Contains Word
+Accepts two strings as args. Function returns a boolean indicating whether the target word is found inside of the sentence
+
+```javascript
+let containsWord = function(sentence, targetWord) {
+    let words = sentence.split(' ');
+
+    for (let i = 0; i < words.length; i++) {
+        let word - words[i];
+
+        // check if current word matches targetWord
+        if (word.toLowerCase() === targetWord.toLowerCase()) {
+            return true;
+        }
+    }
+    // if loop completes without finding match
+    return false;
+}
+
+console.log(containsWord('sounds like a plan', 'like')); // true
+```
+
+## Abbreviate Words
+Returns a new sentence where words that are longer than 4 characters have their vowels removed.
+
+```javascript
+let removeVowels = function(word) {
+    let vowels = 'aeiou';
+    let newWord = '';
+
+    for (let i = 0; i < word.length; i++) {
+        let char = word[i];
+        if (!vowels.includes(char)) {
+            newWord += char;
+        }
+    }
+    return newWord;
+}
+
+let abbreviateWords = function(sentence) {
+    let words = sentence.split(' ');
+    // initialise empty array to store abbreviated words
+    let newWords = [];
+
+    for (let i = 0; i < words.length; i++) {
+        let word = words[i];
+        if (word.length > 4) {
+            // remove vowels
+            newWords.push(removeVowels(word));
+        } else {
+            // if length not greater than 4, keep word unchanged
+            newWords.push(word);
+        }
+    }
+    // join abbreviated words array into new sentence using whitespace as delimiter
+    return newWords.join(' ');
+}
+
+console.log(abbreviateWords('she sends an excellent message ')); // she snds an xcllnt mssg
+```
+
+## Snake to Camel
+Used to convert a string from snake_case to camelCase.
+
+```javascript
+function snakeToCamel(str) {
+    // split input string into array of words using underscore character as delimiter
+    let words = str.split('_');
+    // initialise empty array to store modified words
+    let newWords = [];
+
+    for (let i = 0; i < words.length; i++) {
+        let word = words[i];
+        // capitalise first letter of word and convert rest to lowercase
+        let newWord = word[0].toUpperCase() + word.slice(1).toLowerCase();
+        // add modified word to newWords array
+        newWords.push(newWord);
+    }
+    // join modified words array into single string without any delimiter
+    return newWords.join('');
+}
+
+console.log(snakeToCamel('snakes_go_hiss')); // 'SnakesGoHiss'
+console.log(snakeToCamel('say_hello_world')); // 'SayHelloWorld'
+```
